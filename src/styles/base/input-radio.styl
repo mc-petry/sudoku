@@ -1,0 +1,28 @@
+input[type=radio]
+  visibility hidden
+  position absolute
+  
+  + label
+    position relative
+    padding-left 1.2em
+    display block
+    margin 0 0 .35em
+    font-size: .8em
+    color #666
+    
+    &::before
+      content ""
+      display block
+      width .8em
+      height .8em
+      border-radius 100%
+      border .1em solid rgba(0,0,0,.5)
+      position absolute
+      top .2em
+      left 0
+      transition background .1s
+  
+  &:checked + label
+    &::before
+      background $base-color
+      opacity 1

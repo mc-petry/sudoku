@@ -1,0 +1,18 @@
+.header
+  margin 0 0 4px
+  display flex
+  
+  &__back
+    margin-right 4px
+  
+  &__title
+    flex 1
+    $base-color = saturate(darken(#39f, 15%), -65%)
+    
+    font-size .8em
+    color #fff
+    background $base-color
+    padding .35rem 1rem
+    text-align center
+    border-radius $border-radius
+    border-bottom 4px solid darken($base-color, 30%)

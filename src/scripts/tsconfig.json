@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+    "jsx": "react",
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "target": "es5"
+	}
+}

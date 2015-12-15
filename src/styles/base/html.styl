@@ -1,0 +1,25 @@
+html
+  font-size 26px
+
+body
+  margin 0
+  padding 0
+  font-size 1rem
+  font-family $font-family
+  background-size cover
+  overflow hidden
+
+.container  
+  top 4px
+  bottom 4px  
+  position absolute
+  display flex
+  justify-content space-between
+  
+  width $base-width-lg
+  left "calc(50% - %s)" % ($base-width-lg / 2)
+  
+  @media (max-width $media-lg) {
+    width $base-width-md
+    left "calc(50% - %s)" % ($base-width-md / 2)
+  }

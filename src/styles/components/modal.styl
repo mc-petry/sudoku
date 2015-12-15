@@ -1,0 +1,65 @@
+.modal
+  position fixed
+  left 0
+  right 0
+  top 0
+  bottom 0
+  background rgba(0,0,0,.7)
+  font-size .8rem
+  
+  @media (max-width $media-lg) {
+    font-size 1rem
+  }
+  
+  &.-enter
+    opacity 0
+    
+    .modal__content
+      transform scale(1.1,1.1)
+    
+    &.-enter-active
+      opacity 1
+      transition opacity .2s
+      
+      .modal__content
+        transform none
+        transition all .2s
+  
+  &.-leave
+    opacity 1
+    
+    .modal__content
+      transform none
+    
+    &.-leave-active
+      opacity 0
+      transition opacity .2s
+    
+      .modal__content
+        transform scale(.9,.9)
+        transition all .2s
+  
+  &__content
+    margin 2rem auto 0
+    border-radius $border-radius
+    width $base-width-lg
+    background #fff
+    
+    @media (max-width $media-lg) {
+      width $base-width-md
+    }
+    
+  &__header
+    font-size 1.2em
+    padding .8rem 1rem
+    border-bottom 1px solid rgba(0,0,0,.1)
+    background rgba(0,0,0,.05)
+    
+  &__body
+    padding 1rem 1rem 1rem
+  
+  &__footer
+    padding .8rem 1rem
+    border-top 1px solid rgba(0,0,0,.1)
+    background rgba(0,0,0,.05)
+    text-align right

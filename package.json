@@ -1,0 +1,80 @@
+{
+  "name": "sudoku",
+  "version": "1.0.0",
+  "description": "Sudoku game",
+  "main": "",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mc-petry/sudoku.git"
+  },
+  "keywords": [
+    "sudoku",
+    "game"
+  ],
+  "author": "Petryshyn Sergii",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mc-petry/sudoku/issues"
+  },
+  "homepage": "https://github.com/mc-petry/sudoku#readme",
+  "devDependencies": {
+    "autoprefixer": "^6.1.0",
+    "browserify": "^12.0.1",
+    "cssnano": "^3.3.2",
+    "eslint": "^1.10.1",
+    "gulp": "^3.9.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-stylus": "^2.1.0",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.5",
+    "jest-cli": "^0.8.0",
+    "poststylus": "^0.2.2",
+    "tsify": "^0.13.1",
+    "tslint": "^3.0.0",
+    "typescript": "^1.7.3",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-buffer": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.6.1"
+  },
+  "dependencies": {
+    "autoprefixer": "^6.1.2",
+    "classnames": "^2.2.1",
+    "cssnano": "^3.4.0",
+    "eslint": "^1.10.3",
+    "gulp-stylus": "^2.1.1",
+    "immutable": "^3.7.5",
+    "jest-cli": "^0.8.1",
+    "lodash": "^3.10.1",
+    "react": "^0.14.3",
+    "react-addons-css-transition-group": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "react-redux": "^4.0.0",
+    "redux": "^3.0.4",
+    "seedrandom": "^2.4.2",
+    "tslint": "^3.1.1"
+  },
+  "jest": {
+    "scriptPreprocessor": "preprocessor.js",
+    "testFileExtensions": [
+      "test.ts",
+      "test.tsx"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "tsx"
+    ],
+    "testDirectoryName": "src/scripts",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-dom",
+      "<rootDir>/node_modules/seedrandom"
+    ]
+  }
+}
