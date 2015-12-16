@@ -1,7 +1,8 @@
 import * as Immutable from 'immutable'
-import { generatePuzzle, getFilledCellsCount, IGrid, getErrors, IError } from '../../tools/sudoku'
+import { generatePuzzle, IGrid, getErrors, IError } from '../../tools/sudoku'
 
 const SET_CELL_VALUE = 'board/SET_CELL_VALUE'
+const SET_CELL_MARK = 'board/SET_CELL_MARK'
 const START_NEW_GAME = 'board/START_NEW_GAME'
 
 export interface IPoint {
@@ -18,7 +19,7 @@ export interface ICell {
   /**
    * Manual markers
    */
-  marks: boolean[]
+  marks: number[]
 
   locked?: boolean
 }
@@ -34,7 +35,7 @@ export interface IBoardStore {
 
 function mapGridToGridView(grid: IGrid): IGridView {
   let gv: IGridView = []
-  
+
   for (let j = 0; j < 9; j++) {
     gv[j] = [];
     for (let i = 0; i < 9; i++) {
@@ -46,7 +47,7 @@ function mapGridToGridView(grid: IGrid): IGridView {
       }
     }
   }
-  
+
   return gv
 }
 
@@ -54,14 +55,14 @@ function mapGridViewToGrid(gv: IGridView): IGrid {
   let grid: IGrid = {
     data: []
   }
-  
+
   for (let j = 0; j < 9; j++) {
     grid.data[j] = [];
     for (let i = 0; i < 9; i++) {
       grid.data[j][i] = gv[j][i].value
     }
   }
-  
+
   return grid
 }
 
@@ -90,19 +91,26 @@ function initialState() {
 export default function reducer(state: Immutable.Map<string, any> = initialState(), action: Redux.IAction, xt: any) {
   switch (action.type) {
     case SET_CELL_VALUE:
-    {
       const scvAction = action as ISetCellValueAction
       // if (getFilledCellsCount(grid) == 81 && errors.length == 0)
       // TODO: dispatch CHECK_PUZZLE event here
-      
+
       return state
         .setIn(['cells', scvAction.pos.y, scvAction.pos.x, 'value'], scvAction.value)
         .update(s => {
-          const grid = mapGridViewToGrid(s.get('cells').toJS())
           const errors = getErrors(mapGridViewToGrid(s.get('cells').toJS()))
           return s.set('errors', Immutable.fromJS(errors))
         })
-    }
+
+    case SET_CELL_MARK:
+      const mark = action as ISetCellMarkValueAction
+      return state
+        .updateIn(['cells', mark.pos.y, mark.pos.x, 'marks'], (marks: Immutable.List<number>) => {
+          if (marks.contains(mark.value))
+            return marks.filter(x => x !== mark.value)
+
+          return marks.push(mark.value)
+        })
 
     case START_NEW_GAME:
       const b = action as IStartNewGameAction
@@ -124,6 +132,9 @@ export default function reducer(state: Immutable.Map<string, any> = initialState
         case 'evil':
           filledCells = 22
           break
+
+        default:
+          throw new Error('Invalid difficulty')
       }
 
       const puzzle = generatePuzzle(b.seed, filledCells)
@@ -146,6 +157,19 @@ interface ISetCellValueAction extends Redux.IAction {
 export function setCellValue(pos: IPoint, value: number): ISetCellValueAction {
   return {
     type: SET_CELL_VALUE,
+    pos,
+    value
+  }
+}
+
+interface ISetCellMarkValueAction extends Redux.IAction {
+  pos: IPoint
+  value?: number
+}
+
+export function setCellMark(pos: IPoint, value: number): ISetCellMarkValueAction {
+  return {
+    type: SET_CELL_MARK,
     pos,
     value
   }

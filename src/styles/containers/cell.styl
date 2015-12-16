@@ -10,13 +10,13 @@
   background #fff
   cursor default
   color darken($base-color, 10%)
-  transition background-color .2s
+  user-select none
   
   &--src
     background linear-gradient(to bottom, #cecece 0%, #dfdfdf 30%, #dfdfdf 100%)
     color #555
   
-  &:not(.cell--src)
+  .board:not(.-ctrl) &:not(.cell--src)
     &:hover
       background rgba(255,255,255,.8)
   
@@ -110,3 +110,50 @@
   &:nth-child(n+55):nth-child(-n+72)
     .cell__border
       border-bottom 1px solid $cell-border-color
+  
+  
+  &__marks
+    position absolute
+    left 0
+    top 0
+    right 0
+    bottom 0
+    display flex
+    flex-wrap wrap
+    z-index 1
+    color #5682ae
+  
+  &__mark    
+    width calc((100%) / 3)
+    padding-bottom calc((100% - 2px) / 3)
+    border-right 1px solid transparent
+    border-bottom 1px solid transparent
+    position relative
+    
+    .cell.-has-value &
+    .cell--src &
+      display none
+    
+    &:nth-child(3n)
+      border-right none
+    
+    &:nth-child(n+7):nth-child(-n+9)
+      border-bottom none
+    
+    .board.-ctrl .cell:not(.cell--src) &
+      border-color rgba(0,0,0,.1)
+      
+      &:hover
+        background rgba(0,0,0,.05)
+    
+    //&.-filled
+      //background rgba(0,0,0,.1)
+    
+    &-label
+      position absolute
+      line-height 0
+      top 50%
+      left 0
+      right 0
+      text-align center
+      font-size .5rem

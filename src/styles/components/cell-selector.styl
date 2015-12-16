@@ -2,7 +2,7 @@
   position absolute
   z-index 10
   width 6rem
-  height 6rem
+  height 8rem
   background #fff
   display flex
   flex-wrap wrap
@@ -19,8 +19,11 @@
   .cell:nth-child(n+1):nth-child(-n+9) &
     margin-top -1rem
   
-  .cell:nth-child(n+73):nth-child(-n+81) &
+  .cell:nth-child(n+64):nth-child(-n+72) &
     margin-top -5rem
+  
+  .cell:nth-child(n+73):nth-child(-n+81) &
+    margin-top -7rem
   
   .cell:nth-child(9n) &
     margin-left -5rem
@@ -45,6 +48,7 @@
       transition all .2s
   
   &__item
+  &__clear
     background #fff
     width calc(6rem / 3)
     height calc(6rem / 3)
@@ -57,10 +61,14 @@
     &:nth-child(3n)
       border-right none
     
-    &:nth-child(n+7):nth-child(-n+9)
+    &:nth-child(10)
       border-bottom none
     
     &:hover
       background #777
       color #fff
       cursor default
+  
+  &__clear
+    width 100%
+    border-right none

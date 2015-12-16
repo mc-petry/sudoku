@@ -13,7 +13,6 @@
       "check-space",
       "check-lowercase"
     ],
-    "curly": true,
     "eofline": false,
     "forin": true,
     "indent": [
@@ -83,14 +82,6 @@
     ],
     "radix": true,
     "semicolon": false,
-    "switch-default": true,
-    "trailing-comma": [
-      true,
-      {
-        "multiline": "always",
-        "singleline": "never"
-      }
-    ],
     "triple-equals": [
       true,
       "allow-null-check"
@@ -109,11 +100,6 @@
         "property-declaration": "nospace",
         "variable-declaration": "nospace"
       }
-    ],
-    "use-strict": [
-      true,
-      "check-module",
-      "check-function"
     ],
     "variable-name": [
       true,
