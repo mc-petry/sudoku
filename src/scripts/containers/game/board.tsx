@@ -53,6 +53,11 @@ export default class BoardContainer extends React.Component<IBoardContainerProps
     return (
       <div className={classnames('board', { '-ctrl': ctrlKey })}>
         {board.cells.map((j, nj) => j.map((i, ni) => <Cell data={i} x={ni} y={nj} errorClasses={this.getErrorClasses(ni, nj, i) } />))}
+        {board.solved ?
+          <div className='board__win'>
+            <div className='board__win-text'>You win!</div>
+          </div>
+        : null}
       </div>
     )
   }

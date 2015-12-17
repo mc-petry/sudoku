@@ -52,7 +52,6 @@ export default class CellComponent extends React.Component<ICellComponentProps, 
     const { value, locked, marks } = this.props.data
     const { x, y, errorClasses } = this.props
 
-
     return (
       <div ref='cell' className={classnames('cell', { 'cell--src': locked, '-has-value': value ? true : false }, errorClasses)} onClick={e => this.onCellClicked(e) }>
         <div className='cell__shadow' />

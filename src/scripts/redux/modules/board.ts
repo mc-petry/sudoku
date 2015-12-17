@@ -1,5 +1,5 @@
 import * as Immutable from 'immutable'
-import { generatePuzzle, IGrid, getErrors, IError } from '../../tools/sudoku'
+import { generatePuzzle, IGrid, getErrors, IError, getFilledCellsCount } from '../../tools/sudoku'
 
 const SET_CELL_VALUE = 'board/SET_CELL_VALUE'
 const SET_CELL_MARK = 'board/SET_CELL_MARK'
@@ -31,6 +31,9 @@ export interface IBoardStore {
   src: IGrid
   puzzle: IGrid
   errors: IError[]
+  solved: boolean,
+  seed?: string
+  difficulty?: string
 }
 
 function mapGridToGridView(grid: IGrid): IGridView {
@@ -73,7 +76,8 @@ function initialState() {
     cells: [],
     src: puzzle.src,
     puzzle: puzzle.src,
-    errors: []
+    errors: [],
+    solved: false
   }
 
   for (let j = 0; j < 9; j++) {
@@ -92,14 +96,14 @@ export default function reducer(state: Immutable.Map<string, any> = initialState
   switch (action.type) {
     case SET_CELL_VALUE:
       const scvAction = action as ISetCellValueAction
-      // if (getFilledCellsCount(grid) == 81 && errors.length == 0)
-      // TODO: dispatch CHECK_PUZZLE event here
-
       return state
         .setIn(['cells', scvAction.pos.y, scvAction.pos.x, 'value'], scvAction.value)
         .update(s => {
-          const errors = getErrors(mapGridViewToGrid(s.get('cells').toJS()))
-          return s.set('errors', Immutable.fromJS(errors))
+          let grid = mapGridViewToGrid(s.get('cells').toJS())
+          const errors = getErrors(grid)
+          return s
+            .set('errors', Immutable.fromJS(errors))
+            .set('solved', getFilledCellsCount(grid) === 81 && errors.length === 0)
         })
 
     case SET_CELL_MARK:
@@ -143,6 +147,8 @@ export default function reducer(state: Immutable.Map<string, any> = initialState
         .set('src', puzzle.src)
         .set('puzzle', puzzle.puzzle)
         .set('errors', [])
+        .set('seed', b.seed)
+        .set('difficulty', b.difficulty)
 
     default:
       return state

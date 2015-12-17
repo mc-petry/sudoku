@@ -4,7 +4,7 @@ import GamePage from './game/page'
 import NewGamePage from './new-game/page'
 import CardSlide from '../components/card-slide'
 import { IStore } from '../redux/store'
-import { INavigationStore, Page, selectPage } from '../redux/modules/navigation'
+import { INavigationStore, Page } from '../redux/modules/navigation'
 
 interface IAppProps {
   navigation?: INavigationStore
