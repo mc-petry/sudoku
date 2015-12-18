@@ -149,6 +149,7 @@ export default function reducer(state: Immutable.Map<string, any> = initialState
         .set('errors', [])
         .set('seed', b.seed)
         .set('difficulty', b.difficulty)
+        .set('solved', false)
 
     default:
       return state
